@@ -42,8 +42,8 @@ export default definePlugin({
       display: "fullscreen",
       display_override: ["window-controls-overlay"],
       lang: "en-US",
-      background_color: "#2b2d31", // var(--background-secondary)
-      theme_color: "#1e1f22", // var(--background-tertiary)
+      background_color: "#28282d", // var(--background-secondary)
+      theme_color: "#28282d", // var(--background-tertiary)
       scope: "/", // scope of all possible URL"s
       description: "Imagine a place...",
       orientation: "landscape",
