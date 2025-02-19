@@ -66,24 +66,11 @@ export default definePlugin({
     GuildReadStateStore.addChangeListener(this.setBadge);
     RelationshipStore.addChangeListener(this.setBadge);
 
-    // title bar
-    const { height } = navigator.windowControlsOverlay!.getTitlebarAreaRect();
-    document.body.style.setProperty("--vencord-titlebar-size", height + "px");
-    navigator.windowControlsOverlay!.addEventListener(
-      "geometrychange",
-      this.handleGeometryChange
-    );
-
     // keybinds
     window.addEventListener("message", this.keybindListener);
   },
   stop() {
     if (!IS_EXTENSION) return;
-
-    navigator.windowControlsOverlay!.removeEventListener(
-      "geometrychange",
-      this.handleGeometryChange
-    );
     navigator.setAppBadge(0);
     window.removeEventListenerEventListener("message", this.keybindListener);
     disableStyle(style);
@@ -99,6 +86,19 @@ export default definePlugin({
         match: /(?<=" platform-overlay"\):)\i/,
         replace: "$self.getPlatformClass()"
       }
+    },
+    {
+      find: '"data-windows":',
+      replacement: [
+        {
+          match: /\i===\i\.PlatformTypes\.WINDOWS/g,
+          replace: "true"
+        },
+        {
+          match: /\i===\i\.PlatformTypes\.WEB/g,
+          replace: "false"
+        }
+      ]
     },
     {
       find: "\"NotificationSettingsStore",
@@ -151,14 +151,6 @@ export default definePlugin({
       navigator.setAppBadge(totalCount);
     } catch (e) {
       console.error(e);
-    }
-  },
-  handleGeometryChange(event: WindowControlsOverlayGeometryChangeEvent) {
-    // we want the title bar to be of consistent size, no matter the zoom level, device pixel ratio or OS
-    if (event.visible) {
-      document.body.style.setProperty("--vencord-titlebar-size", event.titlebarAreaRect.height + "px");
-    } else {
-      document.body.style.setProperty("--vencord-titlebar-size", "0px");
     }
   },
   getPlatformClass() {

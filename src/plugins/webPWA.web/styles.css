@@ -23,23 +23,31 @@
     display: none;
   }
 
-  [class*="titleBar"] {
-    height: var(--vencord-titlebar-size);
-    margin-top: 0;
+  .visual-refresh {
+    [class^="winButtons_"] {
+      width: calc(100vw - env(titlebar-area-width, 0px));
+      position: relative;
+    }
+
+    [class*="winButtonsWithDivider_"]::before {
+      left: -6px;
+      position: absolute;
+    }
   }
 
-  [class*="titleBar"] [class*="winButton"] {
+
+  [class^="winButton_"] {
     display: none;
   }
+}
 
-  [class*="notAppAsidePanel_"]>[class*="app_"]>[class*="app_"] [class*="bg_"] {
-    top: calc(var(--vencord-titlebar-size)*-1);
-  }
+.visual-refresh {
+  --custom-app-top-bar-height: env(titlebar-area-height, 0px) !important;
 }
 
 /* hide title bar when not using wco */
 @media all and not (display-mode: window-controls-overlay) {
-  [class*="titleBar"] {
+  .visual-refresh [data-windows][class^="bar_"] {
     display: none;
   }
 }
