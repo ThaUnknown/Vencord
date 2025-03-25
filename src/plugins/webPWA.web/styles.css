@@ -22,27 +22,24 @@
   [class^="listItem_"]:has(+ [class^="listItem_"] [data-list-item-id="guildsnav___app-download-button"]) {
     display: none;
   }
-
-  .visual-refresh {
-    [class^="winButtons_"] {
-      width: calc(100vw - env(titlebar-area-width, 0px));
-      position: relative;
-    }
-
-    [class*="winButtonsWithDivider_"]::before {
-      left: -6px;
-      position: absolute;
-    }
-  }
-
-
-  [class^="winButton_"] {
-    display: none;
-  }
 }
 
 .visual-refresh {
   --custom-app-top-bar-height: env(titlebar-area-height, 0px) !important;
+}
+
+[class^="winButtons_"] {
+  width: calc(100vw - env(titlebar-area-width, 0px));
+  position: relative;
+}
+
+[class*="winButtonsWithDivider_"]::before {
+  left: -6px;
+  position: absolute;
+}
+
+[class^="winButton_"] {
+  display: none;
 }
 
 /* hide title bar when not using wco */
