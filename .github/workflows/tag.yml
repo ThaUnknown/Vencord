@@ -1,0 +1,19 @@
+name: Tag new npm package releases
+on:
+    push:
+    pull_request:
+        branches:
+            - main
+            - dev
+        paths:
+            - package.json
+jobs:
+    tag-npm-release:
+        name: Tag new npm package releases
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: neverendingqs/gh-action-tag-on-npm-version@master
