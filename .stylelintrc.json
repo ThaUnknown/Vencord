@@ -7,6 +7,6 @@
                 "message": "Expected class selector to be kebab-case with camelCase segments"
             }
         ],
-        "media-feature-name-no-unknown": false
+        "media-feature-name-no-unknown": null
     }
 }
