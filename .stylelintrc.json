@@ -8,7 +8,7 @@
             }
         ],
         "media-feature-name-no-unknown": [
-            "display-mode: window-controls-overlay"
+            "window-controls-overlay"
         ]
     }
 }
