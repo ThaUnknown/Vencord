@@ -8,7 +8,11 @@
             }
         ],
         "media-feature-name-no-unknown": [
-            "window-controls-overlay"
+            {
+                "ignoreMediaFeatureNames": [
+                    "window-controls-overlay"
+                ]
+            }
         ]
     }
 }
