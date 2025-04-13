@@ -7,6 +7,8 @@
                 "message": "Expected class selector to be kebab-case with camelCase segments"
             }
         ],
-        "media-feature-name-no-unknown": null
+        "media-feature-name-no-unknown": [
+            "display-mode: window-controls-overlay"
+        ]
     }
 }
