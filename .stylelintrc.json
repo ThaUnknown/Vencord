@@ -6,13 +6,6 @@
             {
                 "message": "Expected class selector to be kebab-case with camelCase segments"
             }
-        ],
-        "media-feature-name-no-unknown": [
-            {
-                "ignoreMediaFeatureNames": [
-                    "window-controls-overlay"
-                ]
-            }
         ]
     }
 }

@@ -1,3 +1,4 @@
+/* stylelint-disable media-feature-name-value-no-unknown */
 /* FIXME: remove this once Discord fixes their css to not explode scrollbars on chromium >=121 */
 * {
   scrollbar-width: unset !important;
@@ -17,6 +18,7 @@
 
 /* only enable this css when in PWA mode */
 @media all and (display-mode: window-controls-overlay) {
+
   /* Download Desktop button in guilds list */
   [class^="listItem_"]:has([data-list-item-id="guildsnav___app-download-button"]),
   [class^="listItem_"]:has(+ [class^="listItem_"] [data-list-item-id="guildsnav___app-download-button"]) {
