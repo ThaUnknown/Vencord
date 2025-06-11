@@ -1,7 +1,6 @@
 name: Tag new npm package releases
 on:
     push:
-    pull_request:
         branches:
             - main
             - dev
