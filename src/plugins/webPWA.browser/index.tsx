@@ -14,6 +14,8 @@ import managedStyle from "./styles.css?managed";
 
 let _keybinds: Record<string, { onTrigger: () => any; }>;
 
+const isPWA = () => !window.matchMedia("(display-mode: browser)").matches;
+
 function colorToHex(color: string) {
     const ctx = document.createElement("canvas").getContext("2d");
     if (!ctx) return "#000000"; // no GPU, you'll have bigger issues than a miscolored title bar
@@ -134,7 +136,8 @@ export default definePlugin({
         }
     },
     stop() {
-        navigator.setAppBadge(0);
+        // Doesn't exist on firefox
+        navigator.clearAppBadge?.();
         this.ctrl.abort();
 
         if (linkEl) {
@@ -174,6 +177,23 @@ export default definePlugin({
                 replace: ',{type:"info",children:$self.renderKeybindsButton(),_children:',
                 predicate: () => !IS_USERSCRIPT
             }
+        },
+        // The web title base is "Discord"; the desktop app leaves it undefined
+        {
+            find: "flashQueue",
+            replacement: {
+                match: /(?<=base:)\i\(\d+\)\.isPlatformEmbedded\?void 0:"Discord"/,
+                replace: "$self.getTitleBase()"
+            }
+        },
+        // Discord's browser badge branch adds the unread dot to the window title `·` and favicon
+        // Take the embedded branch in the installed app, where the OS badge covers unread
+        {
+            find: 'new Set(["Blink","Gecko","WebKit"])',
+            replacement: {
+                match: /\i\.isPlatformEmbedded(?=\)\i=\i=>\i\.Ay\.setBadge\()/,
+                replace: "$&||$self.isPWA()"
+            }
         }
     ],
 
@@ -198,5 +218,8 @@ export default definePlugin({
         } catch (e) {
             console.error(e);
         }
-    }
+    },
+
+    isPWA,
+    getTitleBase: () => isPWA() ? undefined : "Discord"
 });
